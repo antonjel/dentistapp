@@ -1,0 +1,18 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<body>
+<p th:text="#{scheduled.appointments.for}"></p>
+<p th:text="${doctorName}"></p>
+<form th:action="appointmentDetails" method="post">
+    <table>
+        <th th:text="#{visit.id}"></th>
+        <th th:text="#{visit.day}"></th>
+        <tr th:each="visit : ${visitDetailsList}">
+            <td th:text="${visit.visitId}"></td>
+            <td th:text="${visit.visitTime}"></td>
+            <td><button name="updateVisit" type="submit" th:text="#{update.button}" th:value="${visit.visitId}"></button> </td>
+            <td><button name="deleteVisit" type="submit" th:text="#{delete.button}" th:value="${visit.visitId}"></button> </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

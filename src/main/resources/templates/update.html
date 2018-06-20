@@ -1,0 +1,30 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<body>
+<form th:action="visitTimeUpdate" method="post">
+    <input name="visitId" type="hidden" th:value="${visitId}"/>
+    <input name="currentVisitTime" type="hidden" th:value="${currentVisitTime}"/>
+    <table>
+        <th th:text="#{visit.update}"></th>
+        <tr>
+            <td th:text="#{visit.id}"></td>
+            <td th:text="${visitId}"></td>
+        </tr>
+        <tr>
+            <td th:text="#{visit.current.time}"></td>
+            <td th:text="${currentVisitTime}"></td>
+        </tr>
+        <tr th:object="${visitDTO}">
+            <td th:text="#{visit.new.time}"></td>
+            <td><input type="text" th:field="*{visitTime}"/></td>
+            <td th:if="${#fields.hasErrors('visitTime')}" th:errors="*{visitTime}">Error in Visit Day</td>
+            <td th:if="${error} == 'update time already booked'" th:text="#{visit.time.already.taken}"></td>
+        </tr>
+        <tr>
+            <td>
+                <button name="newTime" th:text="#{update.button}" type="submit"></button>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

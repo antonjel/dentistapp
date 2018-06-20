@@ -1,0 +1,44 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<body>
+
+<p th:text="#{current.dentist.registrations}">current.dentist.registrations</p>
+<form>
+<table border="1px solid black">
+    <tr>
+        <th th:text="#{visit.id}"></th>
+        <th th:text="#{dentist.id}"></th>
+        <th th:text="#{dentist.name}"></th>
+        <th th:text="#{dentist.visit.day}"></th>
+    </tr>
+    <tbody >
+        <tr th:each="visit : ${dentistVisits}">
+            <td th:text="${visit.visitId}"></td>
+            <td th:text="${visit.doctorId}"></td>
+            <td th:text="${visit.doctorName}"></td>
+            <td th:text="${visit.visitTime}"></td>
+        </tr>
+    </tbody>
+</table>
+</form>
+<br />
+<hr />
+<br />
+<p th:text="#{current.doctor.registrations}">current.doctor.registrations</p>
+<table border="1px solid black">
+    <tr>
+        <th th:text="#{visit.id}"></th>
+        <th th:text="#{doctor.id}"></th>
+        <th th:text="#{doctor.name}"></th>
+        <th th:text="#{doctor.visit.day}"></th>
+    </tr>
+    <tbody >
+    <tr th:each="visit : ${doctorVisits}">
+        <td th:text="${visit.visitId}"></td>
+        <td th:text="${visit.doctorId}"></td>
+        <td th:text="${visit.doctorName}"></td>
+        <td th:text="${visit.visitTime}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

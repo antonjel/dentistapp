@@ -1,0 +1,74 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<body>
+<form th:action="dentistRegistration" method="post">
+    <table>
+        <th th:text="#{dentist.registration}">dentist.registration</th>
+        <tr  th:object="${doctorDTO}">
+            <td><p th:text="#{dentist.dentistName}">dentist.dentistName</p></td>
+            <td><input type="text" th:field="*{name}"/></td>
+            <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error in Name</td>
+        </tr>
+        <tr th:object="${visitDTO}">
+            <td><p th:text="#{visit.day}">visit.day</p></td>
+            <td><input type="text"  th:field="*{visitTime}"/></td>
+            <td th:if="${#fields.hasErrors('visitTime')}" th:errors="*{visitTime}"></td>
+            <td th:if="${error} == 'dentist time already booked'" th:text="#{visit.time.already.taken}"></td>
+        </tr>
+        <tr>
+            <td>
+                <button type="submit" th:text="#{register.doctor.visit}"></button>
+            </td>
+        </tr>
+    </table>
+</form>
+<br />
+<hr />
+<br />
+<form th:action="gpRegistration" method="post">
+    <table>
+        <th th:text="#{gp.registration}">gp.registration</th>
+        <tr th:object="${doctorDTO}">
+            <td><option th:text="#{gp.doctorName}"></option></td>
+            <td><select name="selectedGPName"><option th:each="gp : ${gpList}" th:text="${gp.name}" th:value="${gp.name}"></option></select></td>
+        </tr>
+        <tr>
+            <td><p th:text="#{visit.day}">visit.day</p></td>
+            <td><input type="date" name="selectedVisitTime" /></td>
+            <td th:if="${error} == 'empty visit time'" th:text="#{visit.time.not.selected}"></td>
+            <td th:if="${error} == 'gp time already booked'" th:text="#{visit.time.already.taken}"></td>
+        </tr>
+        <tr>
+            <td><button type="submit" th:text="#{register.doctor.visit}"></button></td>
+        </tr>
+    </table>
+</form>
+<br />
+<hr />
+<br />
+<form method="get" action = "/redirect">
+    <button type="submit" th:text="#{show.all.registrations}"></button>
+</form>
+<br />
+<hr />
+<br />
+<form th:action="doctorSearch" method="get">
+    <table>
+        <th th:text="#{doctor.appointment.search}"></th>
+        <tr th:object="${doctorDTO}">
+            <td><p th:text="#{doctor.search}"></p></td>
+            <td><input type="text" th:field="*{name}"/></td>
+            <td><button type="submit" th:text="#{search.button}" th:value="*{name}"></button></td>
+        </tr>
+        <tr>
+            <th th:text="#{doctor.name}"></th>
+            <th th:text="#{number.of.visits}"></th>
+        </tr>
+        <tr th:each="visit : ${doctorVisits}">
+            <td th:text="${visit.key}"></td>
+            <td th:text="${visit.value}"></td>
+            <td><button name="getMoreDetails" type="submit" th:text="#{get.more.details}" th:value="${visit.key}"></button> </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
